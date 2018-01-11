@@ -1,7 +1,11 @@
 Persian Subtitle Fixer
 
 ## Usage
-Terminal:
+Without any argument display help
+```shell
+persian-subtitle-fixer
+```
+Convert encoding and replace arabic character with persian, and create backup from file.
 ```shell
 persian-subtitle-fixer subtitle_file.srt
 ```
