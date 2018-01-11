@@ -7,7 +7,6 @@ Version: 1.1
 import os
 import sys
 import shutil
-import time
 targetFormat = 'UTF-16'
 
 # Source: https://stackoverflow.com/a/45167602/3224296
