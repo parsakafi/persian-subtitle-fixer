@@ -7,6 +7,7 @@ Version: 1.1
 import os
 import sys
 import shutil
+import time
 targetFormat = 'UTF-16'
 
 # Source: https://stackoverflow.com/a/45167602/3224296
@@ -56,7 +57,7 @@ def subtitle_fixer(arg):
         if backup == '-b':
             os.remove(newfilename)
         print('Done.')
-        pause()
+        time.sleep(2)
     #except Exception as e: print(e)
     except:
         print("Error: failed to convert '" + file[0] + file[1] + "'.")
