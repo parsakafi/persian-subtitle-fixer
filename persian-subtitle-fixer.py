@@ -9,6 +9,7 @@ import sys
 import shutil
 import time
 targetFormat = 'UTF-16'
+supportFile = ['.srt','.smi']
 
 # Source: https://stackoverflow.com/a/45167602/3224296
 def predict_encoding(file_path, n_lines=20):
@@ -38,11 +39,13 @@ def subtitle_fixer(arg):
         return
     if not os.path.exists(fileName) or not os.path.isfile(fileName):
         print('File input not exists!')
+        pause()
         return
     
     file = os.path.splitext(os.path.basename(fileName))
-    if not file[1].lower() == '.srt':
-        print('Your file is not SRT subtitle file!')
+    if not file[1].lower() in supportFile:
+        print('Your file is not subtitle file! (' + ', '.join(supportFile).upper() + ')')
+        pause()
         return
     
     outputDir = os.path.dirname(os.path.abspath(fileName))
@@ -61,6 +64,7 @@ def subtitle_fixer(arg):
     #except Exception as e: print(e)
     except:
         print("Error: failed to convert '" + file[0] + file[1] + "'.")
+        pause()
         
 def save_subtitle(filename, newFilename, encoding_from, encoding_to='UTF-16'):
     """
