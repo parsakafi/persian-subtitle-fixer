@@ -1,4 +1,4 @@
-Persian Subtitle Fixer
+Persian Subtitle Fixer  
 Convert encoding and replace arabic character with persian.
 
 ## Usage
