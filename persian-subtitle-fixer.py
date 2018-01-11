@@ -1,12 +1,13 @@
 '''
 Persian Subtitle Fixer
 Author: Parsa Kafi (http://parsa.ws)
+Version: 1.1
 '''
 
 import os
 import sys
 import shutil
-
+import time
 targetFormat = 'UTF-16'
 
 # Source: https://stackoverflow.com/a/45167602/3224296
@@ -18,7 +19,7 @@ def predict_encoding(file_path, n_lines=20):
         # Join binary lines for specified number of lines
         rawdata = b''.join([f.readline() for _ in range(n_lines)])
     return chardet.detect(rawdata)['encoding']
-
+    
 def subtitle_fixer(arg):
     """
     Subtitle Fixer
@@ -33,7 +34,7 @@ def subtitle_fixer(arg):
         fileName = arg[1]
         backup = arg[2] if len(arg) == 3 else True
     else:
-        print('File input undefined')
+        help()
         return
     if not os.path.exists(fileName) or not os.path.isfile(fileName):
         print('File input not exists!')
@@ -56,6 +57,8 @@ def subtitle_fixer(arg):
         if backup == '-b':
             os.remove(newfilename)
         print('Done.')
+        pause()
+    #except Exception as e: print(e)
     except:
         print("Error: failed to convert '" + file[0] + file[1] + "'.")
         
@@ -75,11 +78,11 @@ def save_subtitle(filename, newFilename, encoding_from, encoding_to='UTF-16'):
         New file encoding  
     """
     print('Encoding from: ' + encoding_from + ' to ' + encoding_to)
-    with open(filename, 'r') as fr:
-        with open(newFilename, 'w', encoding=encoding_to) as fw:
-            for line in fr:
-                str = replace_arabic(line[:-1])
-                fw.write(str +'\n')
+    fr = open(filename, 'r') if encoding_from == 'MacCyrillic' else open(filename, 'r', encoding=encoding_from)
+    with open(newFilename, 'w', encoding=encoding_to) as fw:
+        for line in fr:
+            str = replace_arabic(line[:-1])
+            fw.write(str +'\n')
 
 def replace_arabic(str):
     """
@@ -100,6 +103,18 @@ def replace_arabic(str):
     for i in range(len(ar)):
         str = str.replace(ar[i],fa[i])
     return str
+    
+def pause():
+    programPause = input("\nPress the <ENTER> key to continue...")
+    
+def help():
+    help = "Persian Subtitle Fixer\nAuthor: Parsa Kafi (http://parsa.ws)\n\n" \
+        "Usage:\n" \
+        "\tpersian-subtitle-fixer subtitle_file.srt\n" \
+        "Disable create backup file:\n" \
+        "\tpersian-subtitle-fixer subtitle_file.srt -b"
+    print(help)
+    pause()
     
 if __name__ == '__main__':
     subtitle_fixer(sys.argv)
