@@ -6,7 +6,7 @@ Without any argument display help
 ```shell
 persian-subtitle-fixer
 ```
-with create backup from file.
+With create backup from file:
 ```shell
 persian-subtitle-fixer subtitle_file.srt
 ```
