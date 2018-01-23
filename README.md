@@ -1,5 +1,5 @@
 Persian Subtitle Fixer  
-Convert encoding and replace arabic character with persian.
+Convert encoding and replace arabic character with persian ([More Info](https://parsa.ws/blog/persian-subtitle-fixer)).
 
 ## Usage
 Without any argument display help
