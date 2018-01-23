@@ -10,7 +10,7 @@ import shutil
 import time
 targetFormat = 'UTF-16'
 supportFile = ['.srt','.smi']
-ignoreEncoding = ['MacCyrillic','IBM855']
+ignoreEncoding = ['MacCyrillic','IBM855','windows-1255']
 
 # Source: https://stackoverflow.com/a/45167602/3224296
 def predict_encoding(file_path, n_lines=20):
