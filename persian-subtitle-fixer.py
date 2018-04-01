@@ -10,7 +10,7 @@ import shutil
 import time
 targetFormat = 'UTF-16'
 supportFile = ['.srt','.smi']
-ignoreEncoding = ['MacCyrillic','IBM855','windows-1255']
+ignoreEncoding = ['MacCyrillic','IBM855','windows-1255','ascii']
 
 # Source: https://stackoverflow.com/a/45167602/3224296
 def predict_encoding(file_path, n_lines=20):
@@ -57,6 +57,7 @@ def subtitle_fixer(arg):
     try:
         format = predict_encoding(fileName)
         print("Converting file: '" + file[0] + file[1] + "'")
+        print('Encoding from: ' + format + ' to ' + targetFormat)
         save_subtitle(newfilename,fileName,format,targetFormat)
         if backup == '-b':
             os.remove(newfilename)
@@ -82,7 +83,6 @@ def save_subtitle(filename, newFilename, encoding_from, encoding_to='UTF-16'):
     encoding_to : str
         New file encoding  
     """
-    print('Encoding from: ' + encoding_from + ' to ' + encoding_to)
     fr = open(filename, 'r') if encoding_from in ignoreEncoding else open(filename, 'r', encoding=encoding_from)
     with open(newFilename, 'w', encoding=encoding_to) as fw:
         for line in fr:
